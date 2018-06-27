@@ -9,8 +9,24 @@ const hypercore = require('hypercore')
 const hyperdiscovery = require('hyperdiscovery')
 const prettyHash = require('pretty-hash')
 const Multicore = require('./multicore')
+const {createClient} = require('dat-pinning-service-client')
+
+require('dotenv').config()
 
 require('events').prototype._maxListeners = 100
+
+let hashbaseClient
+// Hashbase Pinning API
+createClient('https://hashbase.io', {
+  username: process.env.HASHBASE_USERNAME,
+  password: process.env.HASHBASE_PASSWORD,
+}, (err, client) => {
+  if (err) {
+    console.error('hashbase error', err)
+    return
+  }
+  hashbaseClient = client
+})
 
 // Run a cloud peer using pixelpusherd
 // https://github.com/automerge/pixelpusherd
@@ -22,9 +38,16 @@ const defaultCloudPeers = [
 
 const router = express.Router()
 
-router.get('/page/:key', (req, res, next) => {
+function indexHtml (req, res, next) {
   req.url = '/index.html'
   next()
+}
+
+router.get('/pages', indexHtml)
+router.get('/page/:key', indexHtml)
+
+router.post('/pin', (req, res) => {
+  console.log('Jim post pin', req.body)
 })
 
 const multicores = {}

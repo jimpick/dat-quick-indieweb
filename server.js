@@ -7,8 +7,6 @@ const through2 = require('through2')
 const ram = require('random-access-memory')
 const hypercore = require('hypercore')
 const hyperdiscovery = require('hyperdiscovery')
-const sheetify = require('sheetify')
-const brfs = require('brfs')
 const prettyHash = require('pretty-hash')
 const Multicore = require('./multicore')
 
@@ -168,7 +166,10 @@ const port = process.env.PORT || 5000
 const devServer = budo('index.js', {
   port,
   browserify: {
-    transform: [ brfs, sheetify ]
+    transform: [
+      'brfs',
+      ['sheetify', {transform: ['sheetify-nested']}]
+    ]
   },
   middleware: [
     router

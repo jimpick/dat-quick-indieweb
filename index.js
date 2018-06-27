@@ -43,12 +43,16 @@ function store (state, emitter) {
     emitter.on('publish', () => {
       const archive = state.currentArchive ? state.currentArchive
         : multicore.createArchive()
-      const value = state.editor.codemirror.getValue()
+      const value = state.editor.codemirror ?
+        state.editor.codemirror.getValue() : state.editor.indexHtml
+      const title = document.getElementById('title') ?
+        document.getElementByIde('title').value :
+        state.title
       archive.ready(() => {
         const key = archive.key.toString('hex')
         const datJson = {
           url: `dat://${key}/`,
-          title: document.getElementById('title').value,
+          title,
           description: ''
         }
         archive.writeFile('/dat.json', JSON.stringify(datJson, null, 2), err => {

@@ -28,7 +28,9 @@ class Editor extends Nanocomponent {
   // Implement conditional rendering
   update (indexHtml) {
     this.indexHtml = indexHtml
-    this.codemirror.setValue(this.indexHtml)
+    if (this.codemirror) {
+      this.codemirror.setValue(this.indexHtml)
+    }
     // FIXME: update codemirror
     return false
   }

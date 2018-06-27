@@ -1,4 +1,7 @@
-module.exports = (firstName, lastName) => `<html>
+module.exports = (firstName, lastName) => {
+  const title = firstName + ' ' + lastName
+  const dashedTitle = title.toLowerCase().replace(/ /g, '-')
+  return `<html>
 <head>
   <title>${firstName} ${lastName}'s IndieWeb Page</title>
   <style>
@@ -34,6 +37,8 @@ module.exports = (firstName, lastName) => `<html>
 <body>
   <header>
     <h1>${firstName} ${lastName}'s IndieWeb Page</h1>
+
+    Also at: <a href="https://${dashedTitle}-indieweb.hashbase.io/">https://${dashedTitle}-indieweb.hashbase.io/</a>
   </header>
 
   <div class="content">
@@ -50,3 +55,4 @@ module.exports = (firstName, lastName) => `<html>
 </body>
 </html>
 `
+}

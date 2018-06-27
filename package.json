@@ -22,11 +22,11 @@
     "random-access-idb": "^1.0.4",
     "random-access-memory": "^3.0.0",
     "sheetify": "^7.3.2",
+    "sheetify-nested": "^1.0.2",
     "to-buffer": "^1.1.1",
-    "websocket-stream": "^5.1.2"
-  },
-  "engines": {
-    "node": "9.x"
+    "websocket-stream": "^5.1.2",
+    "dotenv": "^6.0.0",
+    "dat-pinning-service-client": "^2.0.2"
   },
   "license": "MIT"
 }

@@ -43,12 +43,16 @@ function store (state, emitter) {
     emitter.on('publish', () => {
       const archive = state.currentArchive ? state.currentArchive
         : multicore.createArchive()
-      const value = state.editor.codemirror.getValue()
+      const value = state.editor.codemirror ?
+        state.editor.codemirror.getValue() : state.editor.indexHtml
+      const title = document.getElementById('title') ?
+        document.getElementById('title').value :
+        state.title
       archive.ready(() => {
         const key = archive.key.toString('hex')
         const datJson = {
           url: `dat://${key}/`,
-          title: document.getElementById('title').value,
+          title,
           description: ''
         }
         archive.writeFile('/dat.json', JSON.stringify(datJson, null, 2), err => {
@@ -72,6 +76,7 @@ function store (state, emitter) {
             )
             state.currentArchive = archive
             multicore.replicateFeed(archive)
+            pin(archive, title)
             emitter.emit('pushState', `/page/${key}`)
           })
         })
@@ -87,7 +92,7 @@ function store (state, emitter) {
       state.title = ''
       multicore.archiver.remove(key, () => {
         delete state.archives[key]
-        emitter.emit('pushState', '/')
+        emitter.emit('pushState', '/pages')
       })
     })
 
@@ -151,7 +156,7 @@ function store (state, emitter) {
           } else {
             console.error('Key not found locally', key)
             // It might be better to display an error in the UI
-            emitter.emit('pushState', '/')
+            emitter.emit('pushState', '/pages')
           }
         }
         readMetadata(archive.metadata)
@@ -201,4 +206,20 @@ function store (state, emitter) {
       })
     }
   })
+}
+
+function pin (archive, title) {
+  console.log('Pinning:', archive.key.toString('hex'), title)
+  fetch('/pin', {
+    method: 'POST',
+    body: JSON.stringify({
+      key: archive.key.toString('hex'),
+      title
+    }),
+    headers:{
+      'Content-Type': 'application/json'
+    }
+  }).then(res => res.json())
+  .catch(error => console.error('Pin Error:', error))
+  .then(response => console.log('Pin Success:', response))
 }

@@ -1,0 +1,112 @@
+body {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: grid;
+  grid: repeat(4, 1fr) / repeat(4, 1fr);
+  flex: 0;
+  grid-gap: 0.3em;
+  margin-bottom: 0.3em;
+}
+
+header select {
+  grid-column: 1 / span 3;
+}
+
+
+h2 {
+  margin: 0 0 0.3em 0;
+}
+
+.title {
+  grid-row: 2;
+  grid-column: 1 / span 3;
+  display: table;
+}
+
+.title span {
+  display: table-cell;
+  width: 1%;
+}
+
+.title input {
+  margin-left: 0.3em;
+  display: table-cell;
+  width: 100%;
+}
+
+@media only screen and (min-device-width : 340px) and (max-device-width : 460px) {
+  .link {
+    font-size: x-small !important;
+  }
+}
+
+@media only screen and (max-width : 340px) {
+  .link {
+    font-size: xx-small !important;
+  }
+}
+
+.link {
+  font-size: small;
+  grid-row: 3;
+  grid-column: 1 / span 4;
+}
+
+.help {
+  color: purple;
+}
+
+.publishBtn {
+  font-size: medium;
+  margin: 0 0 1em 0;
+  padding: 0.3em 0.6em;
+  grid-column: 4;
+  grid-row: 1 / span 2;
+  width: 100%;
+  height: 100%;
+}
+
+#editor {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  flex: 1;
+}
+
+#editor .CodeMirror {
+  height: 100%;
+  width: 100%;
+}
+
+footer {
+  margin-top: 0.2em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+footer > * {
+  margin: 0.1em;
+}
+
+footer > a {
+  margin-right: 0.2em;
+}
+
+footer #more {
+  justify-self: end;
+  width: 7em;
+  margin-left: auto;
+}
+
+.github-button {
+  opacity: 0;
+}

@@ -60,7 +60,10 @@ function landingView (state, emit) {
           ${link}
         </div>
       </div>
-      ${gitHubButton.render()}
+      <div class="link">
+        ${gitHubButton.render()}
+        <a href="/pages">View/edit your previously published pages</a>
+      </div>
     </body>
   `
 

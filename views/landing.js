@@ -57,6 +57,9 @@ function landingView (state, emit) {
           ${link}
         </div>
       </div>
+      <div class="link">
+        <a href="/pages">View/edit previously published pages</a>
+      </div>
     </body>
   `
 

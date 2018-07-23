@@ -4,6 +4,12 @@ Can we make an IndieWeb page with one click?
 
 [https://dat-quick-indieweb.glitch.me/](https://dat-quick-indieweb.glitch.me/)
 
+# Video demo
+
+This demo was made on the second day of the [IndieWeb Summit 2018](https://indieweb.org/2018) in Portland, Oregon. Here's a video of the final project presentation:
+
+* [https://indieweb-summit-2018.hashbase.io/indieweb-summit-2018-jimpick.html](https://indieweb-summit-2018.hashbase.io/indieweb-summit-2018-jimpick.html)
+
 # Overview
 
 This is a work-in-progress. This version is a technical prototype.

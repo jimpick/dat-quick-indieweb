@@ -1,6 +1,7 @@
 const html = require('choo/html')
 const css = require('sheetify')
 const templateWithName = require('../templateWithName')
+const GitHubButton = require('../githubButton')
 
 const prefix = css`
   :host {
@@ -30,6 +31,8 @@ const prefix = css`
 
 module.exports = landingView
 
+const gitHubButton = new GitHubButton()
+
 function landingView (state, emit) {
   const editor = state.editor
   let link = html`<span class="help">Edit your name, then click on "Publish" to create a new web site!</span>`
@@ -57,9 +60,7 @@ function landingView (state, emit) {
           ${link}
         </div>
       </div>
-      <div class="link">
-        <a href="/pages">View/edit previously published pages</a>
-      </div>
+      ${gitHubButton.render()}
     </body>
   `
 

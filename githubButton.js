@@ -9,11 +9,11 @@ class GitHubButton extends Nanocomponent {
 
   createElement () {
     return html`<div><a class="github-button"
-          href="https://github.com/jimpick/dat-quick-indieweb"
+          href="https://github.com/jimpick/codemirror-multicore"
           data-icon="octicon-star"
           data-size="large"
           data-show-count="true"
-          aria-label="Star jimpick/dat-quick-indieweb on GitHub">
+          aria-label="Star jimpick/codemirror-multicore on GitHub">
           Star
         </a></div>
     `

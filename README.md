@@ -8,7 +8,7 @@ Can we make an IndieWeb page with one click?
 
 This demo was made on the second day of the [IndieWeb Summit 2018](https://indieweb.org/2018) in Portland, Oregon. Here's a video of the final project presentation:
 
-* https://dat-quick-indieweb.glitch.me/
+* [https://indieweb-summit-2018.hashbase.io/indieweb-summit-2018-jimpick.html](https://indieweb-summit-2018.hashbase.io/indieweb-summit-2018-jimpick.html)
 
 # Overview
 

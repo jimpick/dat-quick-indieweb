@@ -1,6 +1,7 @@
 const budo = require('budo')
 const express = require('express')
 const expressWebSocket = require('express-ws')
+const bodyParser = require('body-parser')
 const websocketStream = require('websocket-stream/stream')
 const pump = require('pump')
 const through2 = require('through2')
@@ -25,6 +26,7 @@ createClient('https://hashbase.io', {
     console.error('hashbase error', err)
     return
   }
+  console.log('Jim hashbase logged in')
   hashbaseClient = client
 })
 
@@ -47,7 +49,22 @@ router.get('/pages', indexHtml)
 router.get('/page/:key', indexHtml)
 
 router.post('/pin', (req, res) => {
-  console.log('Jim post pin', req.body)
+  try {
+    console.log('Jim post pin', req.body)
+    const dashedTitle = req.body.title.toLowerCase().replace(/ /g, '-')
+    console.log('Jim dashedTitle', dashedTitle)
+    if (!hashbaseClient) return
+    console.log('Pinning...')
+    hashbaseClient.addDat({
+      url: `dat://${req.body.key}/`,
+      name: dashedTitle + '-indieweb'
+      // domains: [`${dashedTitle}-indieweb.hashbase.io`]
+    }, (err, result) => {
+      console.log('Jim Hashbase API', err, result)
+    })
+  } catch (err) {
+    console.log('Jim pin error', err)
+  }
 })
 
 const multicores = {}
@@ -195,6 +212,7 @@ const devServer = budo('index.js', {
     ]
   },
   middleware: [
+    bodyParser.json(),
     router
   ]
 })
